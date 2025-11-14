@@ -3,229 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <title>Laboratorio 10 – Multiverso GTICS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
     <link rel="stylesheet" href="estilos.css">
-
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
-<body class="bg-light">
+<body>
 
-<!-- =======================
-        NAVBAR
-=========================== -->
-<nav class="navbar navbar-dark navbar-expand-lg shadow-sm" style="background-color:#0A2342;">
+<nav class="navbar navbar-dark shadow-sm" style="background-color:#0A2342;">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="#">🌌 Multiverso GTICS</a>
+        <span class="navbar-brand fw-bold">🌌 Multiverso GTICS</span>
     </div>
 </nav>
 
+<div class="container-fluid mt-4">
 
-<div class="container py-4">
+    <ul class="nav nav-tabs" id="mainTabs" role="tablist" style="border-color:#0A2342;">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#panel-demons" type="button">
+                Demon Slayer
+            </button>
+        </li>
 
-    <!-- =======================
-         MULTIVERSO
-    =========================== -->
-    <section id="multiverso" class="mb-5">
-        <h2 class="mb-3 text-primary fw-semibold">Multiverso – Personajes</h2>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#panel-pokemon" type="button">
+                Pokémon
+            </button>
+        </li>
 
-        <div class="row g-4">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#panel-expl" type="button">
+                Exploradores
+            </button>
+        </li>
 
-            <!-- Pokémon -->
-            <div class="col-md-6">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white fw-semibold">
-                        Pokémon
-                    </div>
-                    <div class="card-body">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#panel-becarios" type="button">
+                Becarios API
+            </button>
+        </li>
 
-                        <p class="text-muted">Total Pokémon: <span id="poke-total" class="fw-bold">0</span></p>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#panel-dashboard" type="button">
+                Panel General
+            </button>
+        </li>
+    </ul>
 
-                        <div id="poke-cards" class="row g-3"></div>
+    <div class="tab-content mt-4">
 
-                        <div class="text-center mt-3">
-                            <button id="poke-load-more" class="btn btn-primary btn-sm">
-                                <i class="bi bi-plus-circle"></i> Cargar más Pokémon
-                            </button>
-                        </div>
-                    </div>
-                </div>
+        <!-- Demon Slayer -->
+        <div class="tab-pane fade show active" id="panel-demons">
+            <div class="d-flex justify-content-between mb-3">
+                <h3 class="text-dark fw-semibold">Demon Slayer</h3>
             </div>
 
-            <!-- Rick & Morty -->
-            <div class="col-md-6">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white fw-semibold">
-                        Rick and Morty
-                    </div>
-                    <div class="card-body">
+            <select id="ds-filter" class="form-select w-25 mb-3">
+                <option value="todos">Todos</option>
+                <option value="Demon">Demon</option>
+                <option value="Human">Human</option>
+                <option value="Demon Slayer">Demon Slayer</option>
+            </select>
 
-                        <label class="form-label text-muted">Filtrar por estado:</label>
-                        <select id="rm-filter" class="form-select form-select-sm w-50 mb-2">
-                            <option value="todos">Todos</option>
-                            <option value="Alive">Alive</option>
-                            <option value="Dead">Dead</option>
-                            <option value="unknown">Unknown</option>
-                        </select>
+            <p class="text-muted">
+                Total: <span id="ds-total">0</span> |
+                Filtrados: <span id="ds-total-filtrado">0</span>
+            </p>
 
-                        <p class="text-muted">
-                            Total: <span id="rm-total" class="fw-bold">0</span> |
-                            Filtrados: <span id="rm-total-filtrado" class="fw-bold">0</span>
-                        </p>
-
-                        <div id="rm-cards" class="row g-3"></div>
-
-                        <div class="text-center mt-3">
-                            <button class="rm-page-btn btn btn-primary btn-sm" data-page="1">Página 1</button>
-                            <button class="rm-page-btn btn btn-primary btn-sm" data-page="2">Página 2</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <div id="ds-cards" class="row g-3"></div>
         </div>
-    </section>
 
-
-    <!-- =======================
-           MODAL Bootstrap
-    =========================== -->
-    <div class="modal fade" id="modalInfo" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content shadow">
-                <div class="modal-header">
-                    <h5 class="modal-title fw-semibold">Información</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div id="modal-detalle" class="modal-body"></div>
+        <!-- Pokémon -->
+        <div class="tab-pane fade" id="panel-pokemon">
+            <div class="d-flex justify-content-between mb-3">
+                <h3 class="text-dark fw-semibold">Pokémon</h3>
             </div>
+
+            <p class="text-muted">Total: <span id="poke-total">0</span></p>
+
+            <div id="poke-cards" class="row g-3"></div>
         </div>
-    </div>
 
-
-    <!-- =======================
-        EXPLORADORES
-    =========================== -->
-    <section id="exploradores" class="mb-5">
-        <h2 class="mb-3 text-primary fw-semibold">Exploradores Multiversales</h2>
-
-        <button id="btn-reclutar" class="btn btn-success btn-sm mb-3">
-            <i class="bi bi-person-plus"></i> Reclutar Explorador
-        </button>
-
-        <p class="text-muted">
-            Iniciales: <span id="expl-iniciales" class="fw-bold">0</span> |
-            Nuevos: <span id="expl-nuevos" class="fw-bold">0</span>
-        </p>
-
-        <div id="expl-cards" class="row g-3"></div>
-    </section>
-
-
-    <!-- =======================
-           BECARIOS API
-    =========================== -->
-    <section id="becarios" class="mb-5">
-        <h2 class="mb-3 text-primary fw-semibold">Becarios del Multiverso (API Propia)</h2>
-
-        <form id="form-becario" class="row g-3 card card-body shadow-sm mb-4">
-
-            <input type="hidden" id="bec-id">
-
-            <div class="col-md-6">
-                <label class="form-label">Nombre completo</label>
-                <input type="text" class="form-control" id="bec-nombre" required>
-            </div>
-
-            <div class="col-md-6">
-                <label class="form-label">Carrera</label>
-                <input type="text" class="form-control" id="bec-carrera" required>
-            </div>
-
-            <div class="col-md-6">
-                <label class="form-label">Universidad</label>
-                <input type="text" class="form-control" id="bec-universidad" required>
-            </div>
-
-            <div class="col-md-6">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" id="bec-email" required>
-            </div>
-
-            <div class="col-md-6">
-                <label class="form-label">País</label>
-                <input type="text" class="form-control" id="bec-pais" required>
-            </div>
-
-            <div class="col-md-6">
-                <label class="form-label">Estado</label>
-                <select id="bec-estado" class="form-select">
-                    <option value="Activo">Activo</option>
-                    <option value="Egresado">Egresado</option>
-                </select>
-            </div>
-
-            <div class="col-12 text-end">
-                <button type="submit" id="btn-guardar" class="btn btn-primary">
-                    <i class="bi bi-save"></i> Guardar
+        <!-- Exploradores -->
+        <div class="tab-pane fade" id="panel-expl">
+            <div class="d-flex justify-content-between mb-3">
+                <h3 class="text-dark fw-semibold">Exploradores</h3>
+                <button class="btn btn-success btn-sm" id="btn-reclutar">
+                    <i class="bi bi-person-plus"></i> Nuevo explorador
                 </button>
             </div>
-        </form>
 
+            <p class="text-muted">
+                Iniciales: <b id="expl-iniciales">0</b> |
+                Nuevos: <b id="expl-nuevos">0</b>
+            </p>
 
-        <!-- Tabla -->
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <table class="table table-hover" id="tabla-becarios">
-                    <thead class="table-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre completo</th>
-                        <th>Carrera</th>
-                        <th>Universidad</th>
-                        <th>Email</th>
-                        <th>País</th>
-                        <th>Estado</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody id="bec-tbody"></tbody>
-                </table>
+            <div id="expl-cards" class="row g-3"></div>
+        </div>
 
-                <p class="text-muted text-end">
-                    Total becarios: <span id="bec-total" class="fw-bold">0</span>
-                </p>
+        <!-- Becarios API -->
+        <div class="tab-pane fade" id="panel-becarios">
+            <h3 class="text-dark fw-semibold mb-3">Gestión de Becarios</h3>
+
+            <form id="form-becario" class="row g-3 card card-body shadow-sm mb-4">
+                <input type="hidden" id="bec-id">
+
+                <div class="col-md-4">
+                    <label class="form-label">Nombre completo</label>
+                    <input type="text" id="bec-nombre" class="form-control" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Carrera</label>
+                    <input type="text" id="bec-carrera" class="form-control" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Universidad</label>
+                    <input type="text" id="bec-universidad" class="form-control" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="bec-email" class="form-control" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">País</label>
+                    <input type="text" id="bec-pais" class="form-control" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Estado</label>
+                    <select id="bec-estado" class="form-select">
+                        <option value="Activo">Activo</option>
+                        <option value="Egresado">Egresado</option>
+                    </select>
+                </div>
+
+                <div class="col-12 text-end">
+                    <button class="btn btn-dark"><i class="bi bi-save"></i> Guardar</button>
+                </div>
+            </form>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Carrera</th>
+                            <th>Universidad</th>
+                            <th>Email</th>
+                            <th>País</th>
+                            <th>Estado</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="bec-tbody"></tbody>
+                    </table>
+
+                    <p class="text-end text-muted">Total becarios: <b id="bec-total">0</b></p>
+                </div>
             </div>
         </div>
-    </section>
 
+        <!-- Panel General -->
+        <div class="tab-pane fade" id="panel-dashboard">
+            <h3 class="text-dark fw-semibold mb-3">Panel General</h3>
 
-    <!-- =======================
-           PANEL FINAL
-    =========================== -->
-    <section id="panel" class="mb-5">
-        <h2 class="mb-3 text-primary fw-semibold">Panel General</h2>
+            <ul class="list-group shadow-sm">
+                <li class="list-group-item">Total Demon Slayer: <b id="panel-ds"></b></li>
+                <li class="list-group-item">Total Pokémon: <b id="panel-poke"></b></li>
+                <li class="list-group-item">Exploradores iniciales: <b id="panel-expl-init"></b></li>
+                <li class="list-group-item">Exploradores nuevos: <b id="panel-expl-new"></b></li>
+                <li class="list-group-item">Total becarios: <b id="panel-bec"></b></li>
+                <li class="list-group-item">Consultas totales: <b id="panel-consultas"></b></li>
+            </ul>
+        </div>
 
-        <ul class="list-group shadow-sm">
-            <li class="list-group-item">Total Pokémon: <b id="panel-poke"></b></li>
-            <li class="list-group-item">Total Rick & Morty: <b id="panel-rm"></b></li>
-            <li class="list-group-item">Exploradores iniciales: <b id="panel-expl-init"></b></li>
-            <li class="list-group-item">Exploradores nuevos: <b id="panel-expl-new"></b></li>
-            <li class="list-group-item">Total becarios: <b id="panel-bec"></b></li>
-            <li class="list-group-item">Consultas realizadas: <b id="panel-consultas"></b></li>
-        </ul>
-    </section>
+    </div>
+</div>
 
+<div class="modal fade" id="modalInfo" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow">
+            <div class="modal-header">
+                <h5 class="modal-title fw-semibold">Información</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div id="modal-detalle" class="modal-body"></div>
+        </div>
+    </div>
+</div>
 
-</div> <!-- FIN CONTAINER -->
-
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="multiverso.js"></script>

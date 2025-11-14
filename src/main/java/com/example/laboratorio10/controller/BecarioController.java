@@ -21,7 +21,6 @@ public class BecarioController {
         this.becarioService = becarioService;
     }
 
-    // ===== VALIDACIÓN API KEY =====
     private boolean validarApiKey(String apiKey) {
         return apiKey != null && apiKey.equals(API_KEY_ESPERADA);
     }
@@ -33,7 +32,6 @@ public class BecarioController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(rpta);
     }
 
-    // ===== ENDPOINTS =====
 
     @GetMapping
     public ResponseEntity<?> listar(
