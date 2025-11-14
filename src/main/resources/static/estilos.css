@@ -1,34 +1,90 @@
-/* Colores principales */
-:root {
-    --color-azul: #0A2342;
-    --color-azul-claro: #2E5D9F;
-    --color-gris: #F3F4F6;
+body {
+    background-color: #f5f6fa;
+    font-family: "Segoe UI", sans-serif;
 }
 
-/* Cards de multiverso más ordenadas */
-#poke-cards .card,
-#rm-cards .card,
-#expl-cards .card {
-    padding: 0;
-    border: 1px solid #D1D5DB;
-    border-radius: 6px;
+.nav-tabs .nav-link {
+    color: #0A2342;
+    font-weight: 600;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #0A2342;
+    color: #fff;
+    border-radius: 0;
+    border-color: #0A2342;
+}
+
+.navbar {
+    border-bottom: 3px solid #0A2342;
+}
+
+.card {
+    border: none;
+    border-radius: 8px;
+    transition: transform .15s;
     cursor: pointer;
 }
 
-/* Centramos imágenes */
-#poke-cards img,
-#rm-cards img,
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card img {
+    border-radius: 8px 8px 0 0;
+    height: 140px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 0.5rem !important;
+}
+
+h3 {
+    color: #0A2342;
+}
+
+#modalInfo .modal-content {
+    border-radius: 10px;
+}
+
+#modalInfo .modal-header {
+    background-color: #0A2342;
+    color: white;
+}
+
+#modalInfo img {
+    border-radius: 10px;
+}
+
+.table-dark {
+    background-color: #0A2342 !important;
+}
+
+.btn-dark {
+    background-color: #0A2342 !important;
+    border-color: #0A2342 !important;
+}
+
+.list-group-item {
+    font-size: 1rem;
+}
+
+#panel-dashboard b {
+    color: #0A2342;
+}
+
 #expl-cards img {
-    width: 100%;
-    border-radius: 6px 6px 0 0;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
 }
 
-/* Títulos de secciones */
-h2 {
-    color: var(--color-azul);
+#becarios-cards .card {
+    cursor: default;
+    transform: none;
 }
 
-/* Panel general */
-#panel ul li {
-    font-size: 16px;
+.spinner-border.text-dark {
+    color: #0A2342 !important;
 }

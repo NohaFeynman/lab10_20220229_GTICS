@@ -28,7 +28,6 @@ public class Becario {
     @Column(name = "estado", nullable = false, length = 50)
     private String estado; // Activo / Egresado
 
-    // ===== Constructores =====
 
     public Becario() {
     }
