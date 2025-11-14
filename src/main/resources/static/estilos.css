@@ -1,0 +1,34 @@
+/* Colores principales */
+:root {
+    --color-azul: #0A2342;
+    --color-azul-claro: #2E5D9F;
+    --color-gris: #F3F4F6;
+}
+
+/* Cards de multiverso más ordenadas */
+#poke-cards .card,
+#rm-cards .card,
+#expl-cards .card {
+    padding: 0;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Centramos imágenes */
+#poke-cards img,
+#rm-cards img,
+#expl-cards img {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+}
+
+/* Títulos de secciones */
+h2 {
+    color: var(--color-azul);
+}
+
+/* Panel general */
+#panel ul li {
+    font-size: 16px;
+}
